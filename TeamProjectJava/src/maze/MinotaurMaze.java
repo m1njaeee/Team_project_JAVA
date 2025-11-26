@@ -11,13 +11,13 @@ public class MinotaurMaze {
         Player player = new Player();
         EventManager eventManager = new EventManager();
         //시작 좌표
-        int r = 10;
-        int c = 6;
+        int r = player.playerRow;		//10;
+        int c = player.playerCol;		//6;
         map.reveal(r, c);
 
         printStartScreen();
         //이동 루프
-        boolean isGameOver = false;
+        boolean isGameOver = false;   
         while (!isGameOver) {
             map.printMap(r, c);
             System.out.print("이동 > ");
@@ -25,24 +25,33 @@ public class MinotaurMaze {
             Thread.sleep(100);
             
             //이동 방향
-            int dr = 0, dc = 0;
-            if (input.equals("w")) dr = -1;
-            else if (input.equals("s")) dr = 1;
-            else if (input.equals("a")) dc = -1;
-            else if (input.equals("d")) dc = 1;
-            else { System.out.println("잘못된 입력."); continue; }
-
-            int nextR = r + dr;
-            int nextC = c + dc;
-
+//            int dr = 0, dc = 0;
+//            if (input.equals("w")) dr = -1;
+//            else if (input.equals("s")) dr = 1;
+//            else if (input.equals("a")) dc = -1;
+//            else if (input.equals("d")) dc = 1;
+//            else { System.out.println("잘못된 입력."); continue; }
+//
+//            int nextR = r + dr;
+//            int nextC = c + dc;
+            
+            player.move(input);
+            int nextR = player.playerRow;
+            int nextC = player.playerCol;
+            
             if (!map.isValidMove(nextR, nextC)) {
-                System.out.println(">> 벽");
+            	System.out.println(player.playerRow + " " + player.playerCol);
+            	System.out.println(">> 벽");
                 continue;
             }
 
             r = nextR;
             c = nextC;
+            System.out.println(r + " " +c);
+            
             map.reveal(r, c);
+//            System.out.println(player.playerRow + " " + player.playerCol);
+//            map.reveal(player.playerRow,player.playerCol);
             
             //보스 처치시 루프 탈출
             if (map.isBossRoom(r, c)) {

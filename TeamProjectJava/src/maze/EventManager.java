@@ -17,7 +17,7 @@ public class EventManager {
         }
     }
 
-    //장비 획득
+    //장비 획득 
     private void handleEquipmentEvent(Player player) {
         System.out.println("\n>> 장비를 발견했습니다!");
 
@@ -69,12 +69,12 @@ public class EventManager {
             String c = sc.nextLine();
             System.out.println("------------------------------");
 
-            if (c.equals("1")) {
+            if (c.equals("1")) {            //일반 공격
                 mob.hp -= player.atk;
                 System.out.println(">> 공격! " + player.atk + "데미지");
-            } else if (c.equals("2")) {
+            } else if (c.equals("2")) {     // 스킬 사용
                 useSkill(player, mob);
-            } else if (c.equals("3")) {
+            } else if (c.equals("3")) {     // 도망 사용
                 if (mob.name.equals("미노타우로스")) {
                     System.out.println(">> 보스에게서는 도망칠 수 없습니다!");
                 } else if (Math.random() < 0.5) {
@@ -86,13 +86,15 @@ public class EventManager {
             } else {
                 System.out.println(">> 행동 실패!");
             }
-
+            
+            //전투 승리
             if (mob.hp <= 0) {
                 System.out.println(">> 승리했습니다!");
                 waitEnter();
                 return;
             }
-
+            
+            // 상대몹 공격
             if (mob.stunTurn > 0) {
                 mob.stunTurn--;
             } else {
@@ -100,12 +102,14 @@ public class EventManager {
                 player.hp -= dmg;
                 System.out.println(">> 적의 공격! " + dmg + "피해");
             }
-
+            
+            //플레이어 사망
             if (player.hp <= 0) {
                 System.out.println("GAME OVER");
             }
         }
     }
+    
     //스킬 구현
     private void useSkill(Player player, Monster mob) {
         System.out.println("[ 스킬 선택 ]");
@@ -145,20 +149,23 @@ public class EventManager {
             }
         }
     }
+    
     //랜덤 미궁 몹
     private Monster getRandomMob() {
         double r = Math.random();
-        if (r < 0.25) return new Monster("스켈레톤", 50, 10);
-        else if (r < 0.5) return new Monster("박쥐", 40, 10);
-        else if (r < 0.75) return new Monster("스파이더", 30, 15);
-        else return new Monster("고스트", 50, 5);
+        if (r < 0.25) return new Monster("스켈레톤", 50, 15);
+        else if (r < 0.5) return new Monster("박쥐", 40, 15);
+        else if (r < 0.75) return new Monster("스파이더", 30, 20);
+        else return new Monster("고스트", 50, 10);
     }
+    
     //보스 등장
     public void bossBattle(Player player) {
         System.out.println("\n미노타우로스 등장! ");
         startBattle(player, new Monster("미노타우로스", 100, 25));
     }
-
+    
+    //키입력 대기
     private void waitEnter() {
         System.out.println("엔터 키를 누르면 계속합니다");
         sc.nextLine();

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MinotaurMaze {
     public static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)  {
         //객체 생성
     	DungeonMap map = new DungeonMap();
         Player player = new Player();
@@ -16,13 +16,12 @@ public class MinotaurMaze {
         map.reveal(r, c);
 
         printStartScreen();
-        //이동 루프
+        //이동 루프 
         boolean isGameOver = false;
         while (!isGameOver) {
             map.printMap(r, c);
             System.out.print("이동 > ");
             String input = sc.nextLine();
-            Thread.sleep(100);
             
             //이동 방향
             int dr = 0, dc = 0;

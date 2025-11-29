@@ -23,7 +23,7 @@ public class MinotaurMaze {
             System.out.print("이동 > ");
             String input = sc.nextLine();
             
-            //이동 방향
+            //이동할 방향
             int dr = 0, dc = 0;
             if (input.equals("w")) dr = -1;
             else if (input.equals("s")) dr = 1;
@@ -33,12 +33,13 @@ public class MinotaurMaze {
 
             int nextR = r + dr;
             int nextC = c + dc;
-
+            //이동 할 방향이 벽일시 다시 루프
             if (!map.isValidMove(nextR, nextC)) {
                 System.out.println(">> 벽");
                 continue;
             }
 
+            //실제 이동
             r = nextR;
             c = nextC;
             map.reveal(r, c);

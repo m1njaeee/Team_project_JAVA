@@ -70,12 +70,4 @@ public class Player {
         }
         return false;
     }
-
-    // 상태 출력
-    public void printStatus() {
-        System.out.println("HP: " + hp + "/" + maxHp + 
-                           " | MP: " + mp + "/" + maxMp + 
-                           " | ATK: " + atk + 
-                           " | DEF: " + def);
-    }
 }

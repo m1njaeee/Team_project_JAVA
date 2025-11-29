@@ -11,15 +11,13 @@ public class MinotaurMaze {
         Player player = new Player();
         EventManager eventManager = new EventManager();
         //시작 좌표
-        int r = player.playerRow;		//10;
-        int c = player.playerCol;		//6;
-        map.reveal(r, c);
+        map.reveal(player.playerRow, player.playerCol);
 
         printStartScreen();
         //이동 루프
         boolean isGameOver = false;   
         while (!isGameOver) {
-            map.printMap(r, c);
+            map.printMap(player.playerRow, player.playerCol);
             System.out.print("이동 > ");
             String input = sc.nextLine();
             Thread.sleep(100);
@@ -34,34 +32,75 @@ public class MinotaurMaze {
 //
 //            int nextR = r + dr;
 //            int nextC = c + dc;
-            
-            player.move(input);
-            int nextR = player.playerRow;
-            int nextC = player.playerCol;
-            
-            if (!map.isValidMove(nextR, nextC)) {
-            	System.out.println(player.playerRow + " " + player.playerCol);
-            	System.out.println(">> 벽");
-                continue;
+            int ismoved = 0;
+            switch(input) {
+            	case "W":
+            	case "w":
+            		if(map.isValidMove(player.playerRow-1, player.playerCol)) {
+            			player.moveW();
+            			ismoved = 1;
+            		}else {
+            			System.out.println(">> 벽");
+            		}
+            		break;
+            	case "S":
+            	case "s":
+            		if(map.isValidMove(player.playerRow+1, player.playerCol)) {
+            			player.moveS();
+            			ismoved = 1;
+            		}else {
+            			System.out.println(">> 벽");
+            		}
+            		break;
+            	case "A":
+            	case "a":
+            		if(map.isValidMove(player.playerRow, player.playerCol-1)) {
+            			player.moveA();
+            			ismoved = 1;
+            		}else {
+            			System.out.println(">> 벽");
+            		}
+            		break;
+            	case "D":
+            	case "d":
+            		if(map.isValidMove(player.playerRow, player.playerCol+1)) {
+            			player.moveD();
+            			ismoved = 1;
+            		}else {
+            			System.out.println(">> 벽");
+            		}
+            		break;
+            	default:
+                	System.out.println("잘못된 입력입니다.");
+            		
             }
 
-            r = nextR;
-            c = nextC;
-            System.out.println(r + " " +c);
-            
-            map.reveal(r, c);
+//            int nextR = player.playerRow;
+//            int nextC = player.playerCol;
+//            
+//            if (!map.isValidMove(nextR, nextC)) {
+//            	System.out.println(player.playerRow + " " + player.playerCol);
+//            	System.out.println(">> 벽");
+//                continue;
+//            }
+
+//            r = nextR;
+//            c = nextC;
+//            System.out.println(r + " " +c);
+//            
+//            map.reveal(r, c);
 //            System.out.println(player.playerRow + " " + player.playerCol);
-//            map.reveal(player.playerRow,player.playerCol);
+            map.reveal(player.playerRow,player.playerCol);
             
             //보스 처치시 루프 탈출
-            if (map.isBossRoom(r, c)) {
+            if (map.isBossRoom(player.playerRow, player.playerCol)) {
                 eventManager.bossBattle(player);
                 if (player.hp > 0) System.out.println(">> 미노타우로스 처치 완료! 게임 클리어!");
                 isGameOver = true;
                 return;
             }
             //사망시 루프 탈출
-            if (Math.random() < 0.2) {
+            if (Math.random() < 0.3 && ismoved == 1) {
                 eventManager.triggerEvent(player);
                 if (player.hp <= 0) isGameOver = true;
             }

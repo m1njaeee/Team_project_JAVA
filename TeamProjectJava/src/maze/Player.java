@@ -27,37 +27,28 @@ public class Player {
         this.def = 5;
         this.tempDef = 0;
         this.equipmentLevel = 0;
-        this.playerRow = 10;
+        this.playerRow = 9;
         this.playerCol = 6;
     }
     // 캐릭터 이동
-    public void move(String dir) {
-    	switch (dir) {
-    	case "w":
-    	case "W":
+    public void moveW() {
     		this.playerRow -= 1;
     		if(playerRow < 0) playerRow = 0;
-    		break;
-    	case "s":
-    	case "S":
-    		this.playerRow += 1;
-    		if(playerRow > 10) playerRow = 10;
-    		break;
-    	case "a":
-    	case "A":
-    		this.playerCol -= 1;
-    		if(playerCol < 0) playerCol = 0;
-    		break;
-    	case "d":
-    	case "D":
-    		this.playerCol += 1;
-    		if(playerCol > 10) playerCol = 10;
-    		break;
-    	default:
-        	System.out.println("잘못된 입력.");
-    	}
-    	
     }
+    public void moveS() {
+		this.playerRow += 1;
+		if(playerRow > 9) playerRow = 9;
+    }
+    public void moveA() {
+		this.playerCol -= 1;
+		if(playerCol < 0) playerCol = 0;
+    }
+    public void moveD() {
+		this.playerCol += 1;
+		if(playerCol > 9) playerCol = 9;
+    }
+    		
+    	
     // 체력/마나 풀 회복
     public void healFull() {
         this.hp = maxHp;

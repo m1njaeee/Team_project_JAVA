@@ -30,6 +30,7 @@ public class Player {
         this.playerRow = 9;
         this.playerCol = 6;
     }
+    
     // 캐릭터 이동
     public void moveW() {
     		this.playerRow -= 1;

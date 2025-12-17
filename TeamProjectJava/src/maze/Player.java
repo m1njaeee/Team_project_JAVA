@@ -48,7 +48,6 @@ public class Player {
 		this.playerCol += 1;
 		if(playerCol > 9) playerCol = 9;
     }
-    		
     	
     // 체력/마나 풀 회복
     public void healFull() {
@@ -71,3 +70,4 @@ public class Player {
         return false;
     }
 }
+

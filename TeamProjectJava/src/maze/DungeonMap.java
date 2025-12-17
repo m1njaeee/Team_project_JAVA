@@ -1,29 +1,24 @@
 package maze;
 
 public class DungeonMap {
+	
     // 맵 구현
-    private int[][] map = new int[10][10];
+    //private int[][] map = new int[11][11];
+	//0:벽, 1:길, 2:시작, 3:보스
+	private int[][] map = {
+		        {1,1,1,1,0,0,0,0,0,0},
+		        {1,0,0,1,1,1,1,1,1,1},
+		        {3,0,0,0,1,0,0,1,0,0},
+		        {0,0,0,0,1,0,0,1,1,0},
+		        {1,1,1,1,1,0,0,0,0,0},
+		        {0,0,0,0,1,0,0,0,0,0},
+		        {0,0,1,1,1,1,1,1,1,0},
+		        {1,1,1,1,0,0,1,0,0,0},
+		        {0,0,0,0,0,0,1,0,0,0},
+		        {0,0,0,0,0,0,2,0,0,0}
+	};
+
     private boolean[][] isRevealed = new boolean[10][10];
-
-    public DungeonMap() {
-        initializeMap();
-    }
-
-    //0:벽, 1:길, 2:시작, 3:보스
-    private void initializeMap() {       
-        map[0][0]=1; map[0][1]=1; map[0][2]=1; map[0][3]=1;
-        map[1][0]=1;
-        for(int j=3; j<=9; j++) map[1][j]=1;
-        map[2][0]=3; map[2][4]=1; map[2][7]=1;
-        map[3][4]=1; map[3][7]=1; map[3][8]=1;
-        for(int j=0; j<=4; j++) map[4][j]=1;
-        map[5][4]=1;
-        for(int j=2; j<=8; j++) map[6][j]=1;
-        map[7][0]=1; map[7][1]=1; map[7][2]=1; map[7][3]=1; map[7][6]=1;
-        map[8][6]=1;
-        map[9][6]=1;
-        map[10][6]=2;
-    }
 
     // 맵 출력
     public void printMap(int playerR, int playerC) {

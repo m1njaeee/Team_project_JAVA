@@ -81,6 +81,7 @@ public class MinotaurMaze {
             }
         }
     }
+    
     //시작 화면
     static void printStartScreen() {
         System.out.println("--------------------------------------");

@@ -1,7 +1,6 @@
 package maze;
 
 public class DungeonMap {
-	
     // 맵 구현
     //private int[][] map = new int[11][11];
 	//0:벽, 1:길, 2:시작, 3:보스
